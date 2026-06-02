@@ -9,9 +9,32 @@ namespace MyEngine
 	{
 	}
 
+
 	void AttackComponent::Update(float deltaTime)
 	{
-		//Attack();
+		if (!target) return;
+
+		auto myTransform = gameObject->GetComponent<TransformComponent>();
+		auto targetTransform = target->GetComponent<TransformComponent>();
+
+		if (!myTransform || !targetTransform) return;
+
+		Vector2Df myPos = myTransform->GetWorldPosition();
+		Vector2Df targetPos = targetTransform->GetWorldPosition();
+		float distanceToTarget = (myPos - targetPos).GetLength();
+
+		if (cooldownTimer > 0.0f)
+		{
+			cooldownTimer -= deltaTime;
+		}
+
+		if (distanceToTarget < attackRange && cooldownTimer <= 0.0f)
+		{
+			Attack(); // Наносим урон
+
+			// Сбрасываем таймер на полную длительность кулдауна
+			cooldownTimer = attackCooldown;
+		}
 	}
 
 	void AttackComponent::Render()

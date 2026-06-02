@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "GameWorld.h"
-
+#include "../RoguelikeGame/HealthBarComponent.h"
+#include "StatsComponent.h"
+#include "../RoguelikeGame/GameSettings.h"
 namespace MyEngine
 {
 	GameWorld* GameWorld::Instance()
@@ -15,6 +17,8 @@ namespace MyEngine
 		{
 			gameObjects[i]->Update(deltaTime);
 		}
+
+
 	}
 
 	void GameWorld::FixedUpdate(float deltaTime)
@@ -33,6 +37,61 @@ namespace MyEngine
 		{
 			gameObjects[i]->Render();
 		}
+
+		MyEngine::GameObject* playerObject = nullptr;
+		for (MyEngine::GameObject* obj : gameObjects)
+		{
+			if (obj != nullptr && obj->GetName() == "Player")
+			{
+				playerObject = obj;
+				break;
+			}
+		}
+
+		if (playerObject != nullptr)
+		{
+			MyEngine::StatsComponent* stats = playerObject->GetComponent<MyEngine::StatsComponent>();
+			if (stats != nullptr)
+			{
+				RoguelikeGame::HealthBarComponent healthBar(stats->GetMaxHealth());
+				healthBar.SetHealth(stats->GetCurrentHealth());
+				healthBar.Render();
+
+				if (stats != nullptr)
+				{
+					float damageTaken = stats->GetMaxHealth() - stats->GetCurrentHealth();
+
+					if (damageTaken > 0)
+					{
+						sf::Font font;
+						if (font.loadFromFile(RoguelikeGame::SETTINGS.RESOURCES_PATH + "Fonts/Roboto-Regular.ttf"))
+						{
+							sf::Text damageText;
+							damageText.setFont(font);
+							damageText.setString("Damage: " + std::to_string((int)damageTaken));
+							damageText.setCharacterSize(48);
+							damageText.setFillColor(sf::Color::Red);
+							damageText.setOutlineColor(sf::Color::Black);
+							damageText.setOutlineThickness(3);
+
+							sf::RenderWindow& window = MyEngine::RenderSystem::Instance()->GetMainWindow();
+							sf::Vector2u windowSize = window.getSize();
+							sf::FloatRect textBounds = damageText.getLocalBounds();
+
+							damageText.setOrigin(textBounds.width / 2.0f, textBounds.height / 2.0f);
+							damageText.setPosition(windowSize.x / 2.0f, windowSize.y / 2.0f - 90.0f);
+
+							sf::View savedView = window.getView();
+
+							window.setView(window.getDefaultView());
+							MyEngine::RenderSystem::Instance()->Render(damageText);
+							window.setView(savedView);
+						}
+					}
+				}
+			}
+		}
+
 	}
 
 	void GameWorld::LateUpdate()
@@ -41,6 +100,7 @@ namespace MyEngine
 		{
 			DestroyGameObjectImmediate(markedToDestroyGameObjects[i]);
 		}
+
 	}
 
 	GameObject* GameWorld::CreateGameObject()

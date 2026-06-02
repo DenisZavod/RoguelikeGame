@@ -14,15 +14,15 @@ namespace RoguelikeGame
 {
 	class AI
 	{
-		public:
+	public:
 
-			AI(const Vector2Df& position, GameObject* player);
-			GameObject* GetGameObject();
+		AI(const Vector2Df& position, GameObject* player);
+		GameObject* GetGameObject();
 
-			GameObject* player = nullptr;
+		GameObject* player = nullptr;
 
-		private:
+	private:
 
-			GameObject* gameObject;
+		GameObject* gameObject;
 	};
 }

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "GameObject.h"
 #include "PhysicsSystem.h"
 
@@ -6,36 +6,37 @@ namespace MyEngine
 {
 	class GameWorld
 	{
-		public:
+	public:
 
-			static GameWorld* Instance();
+		static GameWorld* Instance();
 
-			void Update(float deltaTime);
-			void FixedUpdate(float deltaTime);
-			void Render();
-			void LateUpdate();
+		void Update(float deltaTime);
+		void FixedUpdate(float deltaTime);
+		void Render();
+		void LateUpdate();
 
-			GameObject* CreateGameObject();
-			GameObject* CreateGameObject(std::string name);
-			void DestroyGameObject(GameObject* gameObject);
-			void Clear();
+		GameObject* CreateGameObject();
+		GameObject* CreateGameObject(std::string name);
+		void DestroyGameObject(GameObject* gameObject);
+		void Clear();
 
-			void Print() const;
+		void Print() const;
 
-		private:
+	private:
 
-			GameWorld() {}
-			~GameWorld() {}
+		GameWorld() {}
+		~GameWorld() {}
 
-			GameWorld(GameWorld const&) = delete;
-			GameWorld& operator= (GameWorld const&) = delete;
+		GameWorld(GameWorld const&) = delete;
+		GameWorld& operator= (GameWorld const&) = delete;
 
-			float fixedCounter = 0.f;
+		float fixedCounter = 0.f;
 
-			std::vector<GameObject*> gameObjects = {};
-			std::vector<GameObject*> markedToDestroyGameObjects = {};
 
-			void DestroyGameObjectImmediate(GameObject* gameObject);
+		std::vector<GameObject*> gameObjects = {};
+		std::vector<GameObject*> markedToDestroyGameObjects = {};
+
+		void DestroyGameObjectImmediate(GameObject* gameObject);
+		
 	};
 }
-

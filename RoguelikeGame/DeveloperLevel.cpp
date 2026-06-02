@@ -1,11 +1,24 @@
 #include "DeveloperLevel.h"
 #include "Wall.h"
 #include "MazeGenerator.h"
+#include "Logger.h"
+
 
 using namespace MyEngine;
 
 namespace RoguelikeGame
 {
+
+	void DeveloperLevel::OnPlayerDeath()
+	{
+		// Вместо немедленного рестарта, можно просто вывести сообщение
+		LOG_INFO("Игрок погиб. Рестарт уровня через 2 секунды...");
+
+		// Здесь можно добавить задержку или просто сразу вызвать Restart()
+		// Для простоты вызовем сразу:
+		Restart();
+	}
+
 	void DeveloperLevel::Start()
 	{
 		int width = 15;
@@ -78,16 +91,24 @@ namespace RoguelikeGame
 		//mazeGenerator.Generate();
 
 		player = std::make_unique<Player>(std::forward<MyEngine::Vector2Df>({ width / 2 * 128.f, height / 2 * 128.f }));
+
 		ai = std::make_unique<AI>(std::forward<MyEngine::Vector2Df>({ width / 3 * 120.f, height / 3 * 120.f }), player->GetGameObject());
 
 		music = std::make_unique<Music>("music");
+
+
+
 	}
+
+	
 
 	void DeveloperLevel::Restart()
 	{
 		Stop();
 		Start();
 	}
+
+
 
 	void DeveloperLevel::Stop()
 	{

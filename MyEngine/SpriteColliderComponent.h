@@ -3,6 +3,8 @@
 #include "SpriteRendererComponent.h"
 #include "RenderSystem.h"
 #include <SFML/Graphics/Sprite.hpp>
+#include "AttackComponent.h"
+#include "StatsComponent.h"
 
 namespace MyEngine
 {
