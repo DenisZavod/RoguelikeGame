@@ -157,6 +157,7 @@
     <ClCompile Include="GameStateGameOver.cpp" />
     <ClCompile Include="GameStateMainMenu.cpp" />
     <ClCompile Include="GameStatePlaying.cpp" />
+    <ClCompile Include="HealthBarComponent.cpp" />
     <ClCompile Include="LevelLoader.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="MazeGenerator.cpp" />
@@ -181,6 +182,7 @@
     <ClInclude Include="GameStateGameOver.h" />
     <ClInclude Include="GameStateMainMenu.h" />
     <ClInclude Include="GameStatePlaying.h" />
+    <ClInclude Include="HealthBarComponent.h" />
     <ClInclude Include="LevelLoader.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="MazeGenerator.h" />

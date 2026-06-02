@@ -1,4 +1,4 @@
-#include "AI.h"
+п»ї#include "AI.h"
 #include "ResourceSystem.h"
 #include "SpriteColliderComponent.h"
 //#include "MovementComponent.h"
@@ -32,32 +32,8 @@ namespace RoguelikeGame
 		//Attack Component
 		auto attackComponent = gameObject->AddComponent<MyEngine::AttackComponent>(10.0f, player);
 
-		
+
 	}
-
-	//void AI::Update(float deltaTime)
-	//{
-	//	// Получаем компоненты
-	//	auto attackComponent = gameObject->GetComponent<MyEngine::AttackComponent>();
-	//	auto transform = gameObject->GetComponent<MyEngine::TransformComponent>();
-
-	//	// Получаем позицию AI и игрока
-	//	auto playerTransform = player ? player->GetComponent<MyEngine::TransformComponent>() : nullptr;
-	//	if (!playerTransform) return;
-
-	//	auto aiPos = transform->GetWorldPosition();
-	//	auto playerPos = playerTransform->GetWorldPosition();;
-
-	//	// Проверяем дистанцию
-	//	float distance = (aiPos - playerPos).GetLength();
-	//	if (distance < 500.0f) // например, 100 — радиус атаки
-	//	{
-	//		// Атакуем игрока
-	//		//attackComponent->Attack(player); // реализуйте метод Attack, если его нет
-	//	}
-
-
-	//}
 
 	MyEngine::GameObject* AI::GetGameObject()
 	{

@@ -19,6 +19,7 @@ namespace RoguelikeGame
 			void Start() override;
 			void Restart() override;
 			void Stop() override;
+			void OnPlayerDeath();
 
 			std::vector<std::unique_ptr<Wall>> walls;
 			std::vector<std::unique_ptr<Floor>> floors;

@@ -64,6 +64,9 @@
     <ClCompile Include="MazeGenerator.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="HealthBarComponent.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Collision.h">
@@ -133,6 +136,9 @@
       <Filter>Файлы заголовки</Filter>
     </ClInclude>
     <ClInclude Include="MazeGenerator.h">
+      <Filter>Файлы заголовки</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthBarComponent.h">
       <Filter>Файлы заголовки</Filter>
     </ClInclude>
   </ItemGroup>

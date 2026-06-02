@@ -21,11 +21,15 @@ namespace MyEngine
 
 			void Heal(float amount);
 
+			bool IsDead() const { return currentHealth <= 0.0f; }
+
+
 		private:
 
 			float maxHealth;
 			float currentHealth;
 			float armor;
+			float hurtTimer = 0.f; // Добавьте эту строку
 	};
 }
 

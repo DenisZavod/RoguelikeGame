@@ -7,20 +7,20 @@ namespace MyEngine
 {
 	class Engine
 	{
-		public:
+	public:
 
-			Engine(const Engine& app) = delete;
-			Engine& operator= (const Engine&) = delete;
+		Engine(const Engine& app) = delete;
+		Engine& operator= (const Engine&) = delete;
 
-			static Engine* Instance();
+		static Engine* Instance();
 
-			void Run();
+		void Run();
 
-		private:
+	private:
 
-			Engine();
-			~Engine() = default;
+		Engine();
+		~Engine() = default;
 
-			void setupLogger();
+		void setupLogger();
 	};
 }

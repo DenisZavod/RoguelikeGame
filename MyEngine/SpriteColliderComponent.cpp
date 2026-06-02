@@ -1,5 +1,7 @@
 #include "pch.h"
 #include "SpriteColliderComponent.h"
+#include "StatsComponent.h"
+#include "AttackComponent.h"
 
 namespace MyEngine
 {
@@ -15,6 +17,8 @@ namespace MyEngine
 
 		sprite = gameObject->GetComponent<SpriteRendererComponent>()->GetSprite();
 		PhysicsSystem::Instance()->Subscribe(this);
+
+
 	}
 
 	SpriteColliderComponent::~SpriteColliderComponent()
@@ -41,4 +45,6 @@ namespace MyEngine
 
 		RenderSystem::Instance()->Render(rectangle);
 	}
+
+
 }

@@ -14,25 +14,29 @@ namespace MyEngine
 
 	class AttackComponent : public Component
 	{
-		public:
+	public:
 
-			AttackComponent(GameObject* gameObject, float attackPower, GameObject* target);
+		AttackComponent(GameObject* gameObject, float attackPower, GameObject* target);
 
-			void Update(float deltaTime) override;
-			void Render() override;
+		void Update(float deltaTime) override;
+		void Render() override;
 
-			float GetAttackPower() const { return attackPower; }
+		float GetAttackPower() const { return attackPower; }
 
-			void SetAttackPower(float newAttackPower);
+		float GetDamage() const { return attackPower; }
 
-			void Attack();
+		void SetAttackPower(float newAttackPower);
 
-			GameObject* target;
+		void Attack();
 
-		private:
+		GameObject* target;
 
-			float attackPower;
+	private:
+
+		float attackPower;
+		float attackCooldown = 5.0f; // Время перезарядки в секундах
+		float cooldownTimer = 5.0f; // Таймер
+
+		float attackRange = 10.0f; // Дистанция атаки (в пикселях)
 	};
 }
-
-
