@@ -17,11 +17,17 @@ namespace MyEngine
 			float GetMaxHealth() const { return maxHealth; }
 			float GetArmor() const { return armor; }
 
+
 			void TakeDamage(float damage);
 
 			void Heal(float amount);
 
 			bool IsDead() const { return currentHealth <= 0.0f; }
+
+			float GetMaxStamina() const { return maxStamina; }
+			float GetCurrentStamina() const { return currentStamina; }
+
+			
 
 
 		private:
@@ -30,6 +36,10 @@ namespace MyEngine
 			float currentHealth;
 			float armor;
 			float hurtTimer = 0.f; // Добавьте эту строку
+			float maxStamina = 100.0f; // Начальное значение
+			float currentStamina = maxStamina;
+			float drainRatePerSecond = 0.2f; // Сколько стамины тратится в секунду
+			float accumulatedTime = 0.0f; // Аккумулятор для счёта времени
 	};
 }
 
