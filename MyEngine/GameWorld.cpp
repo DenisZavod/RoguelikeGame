@@ -3,6 +3,7 @@
 #include "../RoguelikeGame/HealthBarComponent.h"
 #include "StatsComponent.h"
 #include "../RoguelikeGame/GameSettings.h"
+#include "../RoguelikeGame/StaminaBarComponent.h"
 namespace MyEngine
 {
 	GameWorld* GameWorld::Instance()
@@ -56,6 +57,10 @@ namespace MyEngine
 				RoguelikeGame::HealthBarComponent healthBar(stats->GetMaxHealth());
 				healthBar.SetHealth(stats->GetCurrentHealth());
 				healthBar.Render();
+
+				RoguelikeGame::StaminaBarComponent staminaBar(stats->GetMaxStamina());
+				staminaBar.SetStamina(stats->GetCurrentStamina()); // <-- ÂÎÇÌÎÆÍÀß ÎØÈÁÊÀ
+				staminaBar.Render();
 
 				if (stats != nullptr)
 				{

@@ -164,6 +164,7 @@
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Music.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="StaminaBarComponent.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -190,6 +191,7 @@
     <ClInclude Include="Music.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="StaminaBarComponent.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
   <ItemGroup>

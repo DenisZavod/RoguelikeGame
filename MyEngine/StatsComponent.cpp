@@ -17,6 +17,8 @@ namespace MyEngine
         // Таймер обнуляется при создании объекта
     }
 
+    
+
     void StatsComponent::Update(float deltaTime)
     {
         // Логика таймера мигания
@@ -28,6 +30,12 @@ namespace MyEngine
             if (hurtTimer < 0.0f)
                 hurtTimer = 0.0f;
         }
+
+
+        
+
+     
+        
     }
 
     void StatsComponent::Render()
@@ -60,6 +68,8 @@ namespace MyEngine
 
         hurtTimer = 0.4f;
 
+        ConsumeStamina(1.0f); // lополнительно тратим 5 единиц стамины
+
         LOG_INFO("Took " + std::to_string(damage) + " damage, current health: " + std::to_string(currentHealth));
 
         LOG_INFO("Игрок получил " + std::to_string(damage) + " урона.");
@@ -78,4 +88,13 @@ namespace MyEngine
         LOG_INFO("Healed " + std::to_string(amount) + " health, current health: " + std::to_string(currentHealth));
 
     }
+
+    void StatsComponent::ConsumeStamina(float amount)
+    {
+        currentStamina -= amount;
+        if (currentStamina < 0)
+            currentStamina = 0;
+    }
+
+
 }
