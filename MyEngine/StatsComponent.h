@@ -27,6 +27,9 @@ namespace MyEngine
 			float GetMaxStamina() const { return maxStamina; }
 			float GetCurrentStamina() const { return currentStamina; }
 
+	
+			void ConsumeStamina(float amount);
+
 			
 
 

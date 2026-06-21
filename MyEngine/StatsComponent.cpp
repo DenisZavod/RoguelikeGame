@@ -32,22 +32,9 @@ namespace MyEngine
         }
 
 
-        accumulatedTime += deltaTime;
+        
 
-        if (currentStamina > 0)
-        {
-            int secondsPassed = static_cast<int>(accumulatedTime);
-            currentStamina -= secondsPassed * 1.0f; // Скорость расхода
-            accumulatedTime -= secondsPassed;
-        }
-
-
-        if (currentStamina <= 0)
-        {
-            currentStamina = maxStamina;
-        }
-
-        LOG_INFO("Current Stamina: " + std::to_string(currentStamina));
+     
         
     }
 
@@ -81,6 +68,8 @@ namespace MyEngine
 
         hurtTimer = 0.4f;
 
+        ConsumeStamina(1.0f); // lополнительно тратим 5 единиц стамины
+
         LOG_INFO("Took " + std::to_string(damage) + " damage, current health: " + std::to_string(currentHealth));
 
         LOG_INFO("Игрок получил " + std::to_string(damage) + " урона.");
@@ -98,6 +87,13 @@ namespace MyEngine
 
         LOG_INFO("Healed " + std::to_string(amount) + " health, current health: " + std::to_string(currentHealth));
 
+    }
+
+    void StatsComponent::ConsumeStamina(float amount)
+    {
+        currentStamina -= amount;
+        if (currentStamina < 0)
+            currentStamina = 0;
     }
 
 

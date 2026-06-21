@@ -35,6 +35,21 @@ namespace MyEngine
 			// Сбрасываем таймер на полную длительность кулдауна
 			cooldownTimer = attackCooldown;
 		}
+
+		auto myStats = gameObject->GetComponent<StatsComponent>();
+		if (myStats && myStats->GetCurrentStamina() > 0)
+		{
+			// продолжаем атаку, если стамина есть
+			if (distanceToTarget < attackRange && cooldownTimer <= 0.0f)
+			{
+				Attack(); // наносим урон
+				cooldownTimer = attackCooldown;
+			}
+		}
+		else
+		{
+			// Игрок не может атаковать, пока стамина не восстановится
+		}
 	}
 
 	void AttackComponent::Render()
@@ -58,6 +73,12 @@ namespace MyEngine
 		{
 			float damage = attackPower;
 			targetStatsComponent->TakeDamage(damage);
+
+			auto myStats = gameObject->GetComponent<StatsComponent>();
+			if (myStats)
+			{
+				myStats->ConsumeStamina(4.0f); // Стоимость атаки в очках стамины
+			}
 		}
 	}
 }
