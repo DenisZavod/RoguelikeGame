@@ -68,7 +68,6 @@ namespace MyEngine
 
         hurtTimer = 0.4f;
 
-        ConsumeStamina(1.0f); // lополнительно тратим 5 единиц стамины
 
         LOG_INFO("Took " + std::to_string(damage) + " damage, current health: " + std::to_string(currentHealth));
 
@@ -94,6 +93,8 @@ namespace MyEngine
         currentStamina -= amount;
         if (currentStamina < 0)
             currentStamina = 0;
+
+        LOG_INFO("Current Stamina: " + std::to_string(currentStamina));
     }
 
 

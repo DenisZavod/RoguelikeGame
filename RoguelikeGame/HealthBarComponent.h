@@ -1,13 +1,13 @@
-#pragma once // <-- Это очень важная строка, она предотвращает ошибки
+#pragma once 
 
 #include <SFML/Graphics.hpp>
 #include "RenderSystem.h" 
 #include <SFML/Graphics/Text.hpp>
 
-// Убедись, что класс находится внутри пространства имен RoguelikeGame
+
 namespace RoguelikeGame
 {
-    // Имя класса должно точно совпадать с именем файла
+   
     class HealthBarComponent
     {
     public:

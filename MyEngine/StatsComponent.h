@@ -41,8 +41,7 @@ namespace MyEngine
 			float hurtTimer = 0.f; // Добавьте эту строку
 			float maxStamina = 100.0f; // Начальное значение
 			float currentStamina = maxStamina;
-			float drainRatePerSecond = 0.2f; // Сколько стамины тратится в секунду
-			float accumulatedTime = 0.0f; // Аккумулятор для счёта времени
+			
 	};
 }
 

@@ -48,6 +48,7 @@ namespace RoguelikeGame
 		//Attack Component
 		auto attackComponent = gameObject->AddComponent<MyEngine::AttackComponent>(10.0f, gameObject);
 
+		
 	}
 
 	MyEngine::GameObject* Player::GetGameObject()

@@ -27,7 +27,10 @@ namespace MyEngine
 
 		void SetAttackPower(float newAttackPower);
 
-		void Attack();
+		void Attack(StatsComponent* myStats);
+
+
+		//void Attack();
 
 		GameObject* target;
 
