@@ -2,6 +2,7 @@
 #include "AttackComponent.h"
 #include "InputComponent.h" 
 #include "StatsComponent.h"
+#include "TransformComponent.h"
 
 namespace MyEngine
 {
@@ -12,7 +13,7 @@ namespace MyEngine
 
 	void AttackComponent::Update(float deltaTime)
 	{
-		if (!target) return; 
+		if (!target) return;
 
 		auto myTransform = gameObject->GetComponent<TransformComponent>();
 		auto targetTransform = target->GetComponent<TransformComponent>();
@@ -22,37 +23,48 @@ namespace MyEngine
 		Vector2Df targetPos = targetTransform->GetWorldPosition();
 		float distanceToTarget = (myPos - targetPos).GetLength();
 
-		
 		if (cooldownTimer > 0.0f)
 		{
 			cooldownTimer -= deltaTime;
 		}
 
-		
 		auto myStats = gameObject->GetComponent<StatsComponent>();
-		if (!myStats || myStats->GetCurrentStamina() <= 0.0f)
+		if (!myStats) return;
+
+		
+		const float PASSIVE_DAMAGE_PER_SECOND = 0.2f; // Сколько ХП теряем в секунду
+		if (distanceToTarget < attackRange)
 		{
-			return; 
+			myStats->TakeDamage(PASSIVE_DAMAGE_PER_SECOND * deltaTime);
 		}
 
-		
-		auto inputComponent = gameObject->GetComponent<InputComponent>();
-		bool isPlayerWantsToAttack = false;
+		if (myStats->GetCurrentStamina() <= 0.0f)
+		{
+			return; // Если стамина кончилась, выходим (активная атака невозможна)
+		}
 
+		bool isPlayerWantsToAttack = false;
+		auto inputComponent = gameObject->GetComponent<InputComponent>();
 		if (inputComponent && inputComponent->IsAttack())
 		{
 			isPlayerWantsToAttack = true;
 		}
 
-		
 		bool isEnemyAutoAttack = !inputComponent;
 
-		
+		// Проверка условий для удара
 		if ((isPlayerWantsToAttack || isEnemyAutoAttack) &&
 			distanceToTarget < attackRange &&
 			cooldownTimer <= 0.0f)
 		{
-			Attack(myStats); 
+			// Защита от самобоя (Self-harm prevention)
+			if (target->GetName() == "player")
+			{
+				LOG_INFO("Self-attack blocked.");
+				return;
+			}
+
+			Attack(myStats);
 			cooldownTimer = attackCooldown;
 		}
 	}
@@ -65,13 +77,13 @@ namespace MyEngine
 	{
 		if (!target) return;
 
-		
 		auto targetStatsComponent = target->GetComponent<StatsComponent>();
 		if (targetStatsComponent)
 		{
 			targetStatsComponent->TakeDamage(attackPower);
 		}
 
-		myStats->ConsumeStamina(10.0f);
+		// Трата стамины 
+		myStats->ConsumeStamina(5.0f);
 	}
 }
